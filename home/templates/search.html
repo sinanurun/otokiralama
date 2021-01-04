@@ -1,0 +1,105 @@
+{% extends 'home_index.html' %}
+
+
+{% block title %} {{ setting.title }} {% endblock %}
+{% block description %} {{ setting.description }} {% endblock %}
+{% block keywords %} {{ setting.keywords }} {% endblock %}
+{% block head %}
+
+{% endblock %}
+
+{% block body %}
+
+
+{%  load static %}
+
+    <div class="wrapper bgded overlay" style="background-image:url('/static/images/demo/backgrounds/01.png');">
+  <div id="breadcrumb" class="hoc clear">
+    <!-- ################################################################################################ -->
+    <ul>
+      <li><a href="/">Home</a></li>
+      <li><a href="">Search</a></li>
+    </ul>
+    <!-- ################################################################################################ -->
+  </div>
+</div>
+
+    <div class="wrapper row3">
+    <div class="hoc clear">
+    <form method="post" action="/search/1">
+        {% csrf_token %}
+
+                        <table><tr>
+                            <td><label> Category</label>{{ sform2.category }}</td>
+                            <td><label> Location</label>{{ sform2.location }}</td>
+                            <td><label> Gear</label>{{ sform2.gear }}</td>
+                            <td><label> Fuel</label>{{ sform2.fuel }}</td>
+                        <td><label>Daily Max Km</label>{{ sform2.daily_km }}</td></tr>
+                            <tr>
+                            <td><label>Daily Max Price</label>{{ sform2.price }}</td>
+                            <td><label> Rez Start</label>{{ sform2.baslangic }}</td>
+                            <td><label> Rez Finish</label>{{ sform2.bitis }}</td>
+                                <td><label>Min Liciense Age</label>{{ sform2.min_li_age }}</td>
+                            <td><input type="submit" value="Search"></td></tr>
+                        </table>
+                    </form>
+    </div>
+  <main class="hoc container clear">
+    <!-- main body -->
+    <!-- ################################################################################################ -->
+    <div class="content">
+
+      <!-- ################################################################################################ -->
+      <div id="gallery">
+        <figure>
+
+        <div >
+
+        </div>
+          <header class="heading">Seacrh Otomobils</header>
+
+
+
+          <ul class="nospace group elements">
+
+              {% for otomobil in otomobils %}
+            <li class="{% cycle 'one_quarter first' 'one_quarter' 'one_quarter' 'one_quarter' %}">
+
+            <figure><img src="{{ otomobil.image_tag2 }}" height="250" alt="">
+          <figcaption><a href="/otomobil/{{ otomobil.id }}/{{ otomobil.slug }}">{{ otomobil.title }}</a></figcaption>
+        </figure>
+            </li>
+
+              {% endfor %}
+
+          </ul>
+          <figcaption>{{ catdata.description }} Otomobils</figcaption>
+        </figure>
+      </div>
+      <!-- ################################################################################################ -->
+      <!-- ################################################################################################ -->
+      <nav class="pagination">
+        <ul>
+          <li><a href="#">&laquo; Previous</a></li>
+          <li><a href="#">1</a></li>
+          <li><a href="#">2</a></li>
+          <li><strong>&hellip;</strong></li>
+          <li><a href="#">6</a></li>
+          <li class="current"><strong>7</strong></li>
+          <li><a href="#">8</a></li>
+          <li><a href="#">9</a></li>
+          <li><strong>&hellip;</strong></li>
+          <li><a href="#">14</a></li>
+          <li><a href="#">15</a></li>
+          <li><a href="#">Next &raquo;</a></li>
+        </ul>
+      </nav>
+      <!-- ################################################################################################ -->
+    </div>
+    <!-- ################################################################################################ -->
+    <!-- / main body -->
+    <div class="clear"></div>
+  </main>
+</div>
+
+{% endblock %}
